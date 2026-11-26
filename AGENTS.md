@@ -8,6 +8,9 @@ It reads the subscribers, checks an issue, and sends it to a practice mail serve
 - Use npm for everything.
 - Never use a real person's email address. Use @example.com, and @resend.dev for practice sends.
 - Commit and push after every step.
+- The Mailroom Lab (`Mailroom Lab.md`) is written for Python. Every step needs a
+  TypeScript-equivalent prompt instead. Log that prompt, and its check/test
+  prompt, in `typescript-prompts.md` under that step's heading.
 
 ## How I learn
 
