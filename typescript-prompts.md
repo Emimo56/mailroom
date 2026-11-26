@@ -36,7 +36,24 @@ Then ask me two quick questions, one at a time, about why the rules live in a fi
 ## Step 1 — Count your subscribers
 
 ### Prompt used
-_pending — spec still being worked out in chat_
+```
+Mailroom's first job: count the subscribers in data/subscribers.csv.
+First write my expected answers as assert lines in checks.ts that call my
+functions, and show me them failing: 24 in total, and 8 in each of the three
+groups.
+Then write subscribers.ts so that node dist/index.js subscribers prints the
+total and one line per group, and the checks pass.
+```
 
 ### Check prompt
-_pending_
+```
+Test my subscriber count. Don't change any project files.
+1. Run npx tsc && node dist/checks.js, and node dist/index.js subscribers.
+2. Count the rows and the groups in data/subscribers.csv yourself with a
+   command, without Mailroom's code. Do the numbers agree?
+3. Make a copy with only 6 rows, outside the project, and run the count on it.
+   Does it say 6?
+Give me a short table: Test | Pass or Fail | What you found.
+Then ask me two quick questions, one at a time, about why I wrote the expected
+numbers before the code.
+```

@@ -1,25 +1,19 @@
-import { readFile } from "node:fs/promises";
-import type { Subscriber, Issue } from "./types.js";
-
-async function loadSubscribers(): Promise<Subscriber[]> {
-  const raw = await readFile("data/subscribers.json", "utf-8");
-  return JSON.parse(raw) as Subscriber[];
-}
-
-async function loadIssue(path: string): Promise<Issue> {
-  const raw = await readFile(path, "utf-8");
-  return JSON.parse(raw) as Issue;
-}
+import { countSubscribers, countByGroup } from "./subscribers.js";
 
 async function main(): Promise<void> {
-  const issuePath = process.argv[2] ?? "data/issues/2026-01-steep-club.json";
-  const subscribers = await loadSubscribers();
-  const issue = await loadIssue(issuePath);
+  const command = process.argv[2];
 
-  console.log(`Steep Club issue: ${issue.subject}`);
-  console.log(`Sending to ${subscribers.length} subscriber(s) via practice mail server (resend.dev)...`);
-  for (const subscriber of subscribers) {
-    console.log(`  -> ${subscriber.name} <${subscriber.email}>`);
+  if (command !== "subscribers") {
+    console.log("Usage: mailroom subscribers");
+    return;
+  }
+
+  const total = await countSubscribers();
+  const byGroup = await countByGroup();
+
+  console.log(`Total subscribers: ${total}`);
+  for (const [group, count] of Object.entries(byGroup)) {
+    console.log(`${group}: ${count}`);
   }
 }
 
